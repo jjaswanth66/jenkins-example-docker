@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'mvn --version'
         sh 'mvn package'
-        dir('/usr/src/app/pom.xml')
+        dir('/usr/share/maven/pom.xml')
         sh 'mvn install'
         sh 'mvn package'
       }

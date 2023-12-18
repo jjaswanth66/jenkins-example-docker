@@ -5,20 +5,16 @@ pipeline {
       agent {
         docker { 
             image 'maven:3.8.1-adoptopenjdk-11'
-            
                }
       }
       steps {
-        
-        sh 'mvn --version'
-        
+        sh 'mvn --version' 
       }
       steps {
         git 'https://github.com/jjaswanth66/jenkins-example-docker.git'
         sh 'mvn install'
         sh 'mvn package'
       }
-    
     }
     stage('Front-end') {
       agent {

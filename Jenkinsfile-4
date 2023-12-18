@@ -9,9 +9,9 @@ pipeline {
                }
       }
       steps {
+        dir('/var/lib/jenkins/workspace/jenkins-example-docker/pom.xml')
         sh 'mvn --version'
         sh 'mvn package'
-        dir('/usr/share/maven/pom.xml')
         sh 'mvn install'
         sh 'mvn package'
       }

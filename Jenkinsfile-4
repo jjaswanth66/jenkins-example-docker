@@ -8,13 +8,13 @@ pipeline {
                }
       }
       steps {
+        git 'https://github.com/gkdevops/PetClinic.git'
         sh 'mvn --version' 
-      }
-      steps {
-        git 'https://github.com/jjaswanth66/jenkins-example-docker.git'
         sh 'mvn install'
         sh 'mvn package'
+        
       }
+     
     }
     stage('Front-end') {
       agent {

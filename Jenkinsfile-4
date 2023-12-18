@@ -3,10 +3,13 @@ pipeline {
   stages {
     stage('Back-end') {
       agent {
-        docker { image 'maven:3.8.1-adoptopenjdk-11' }
+        docker { 
+            image 'maven:3.8.1-adoptopenjdk-11'
+            args '-v $HOME/.m2:/root/.m2'
+               }
       }
       steps {
-       dir('/var/lib/jenkins/workspace/docker-example')
+       
         sh 'mvn --version'
         sh 'mvn package'
       }

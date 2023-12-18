@@ -6,6 +6,7 @@ pipeline {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
+       dir('/var/lib/jenkins/workspace/docker-example')
         sh 'mvn --version'
         sh 'mvn package'
       }

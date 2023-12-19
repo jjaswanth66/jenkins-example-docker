@@ -1,0 +1,47 @@
+pipeline {
+  agent none
+  stages {
+    stage('Back-end') {
+      agent {
+        docker { 
+            image 'maven:3.8.1-adoptopenjdk-11'
+               }
+      }
+      steps {
+        git 'https://github.com/gkdevops/PetClinic.git'
+        sh 'mvn --version' 
+        sh 'mvn install'
+        sh 'mvn package'
+        
+      }
+     
+    }
+    stage('Front-end') {
+      agent {
+        docker { image 'node:16-alpine' }
+      }
+      steps {
+        sh 'node --version'
+      }
+    }
+    stage ('sonarqube scan') {
+        agent { 
+            docker { image 'sonarqube'}
+        }
+        steps {
+          git 'https://github.com/gkdevops/PetClinic.git'
+         when {
+                expression { params.env_name == 'dev' }
+            }
+            environment {
+                SCANNER_HOME = '/opt/sonar-scanner' // Replace with your SonarQube scanner path within the Docker container
+            }
+            steps {
+                script {
+                    sh "${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+                }
+        }
+        }
+    }
+  }
+}

@@ -28,9 +28,7 @@ pipeline {
         }
         
         stage('SonarQube Scan') {
-            when {
-                expression { params.env_name == 'master' }
-            }
+           
             agent {
                 docker { 
                     image 'sonarqube'

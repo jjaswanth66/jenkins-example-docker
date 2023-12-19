@@ -26,7 +26,7 @@ pipeline {
     }
     stage ('sonarqube scan') {
         agent { 
-            docker { image 'sonarqube'}
+            docker { image 'sonarqube:lts'}
         }
         steps {
           git 'https://github.com/gkdevops/PetClinic.git'

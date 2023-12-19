@@ -13,7 +13,6 @@ pipeline {
             steps {
                 git 'https://github.com/gkdevops/PetClinic.git'
                 sh 'mvn --version' 
-                sh 'mvn clean'
             }
         }
         
